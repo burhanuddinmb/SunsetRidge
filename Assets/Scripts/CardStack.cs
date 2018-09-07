@@ -22,7 +22,7 @@ public class CardStack : MonoBehaviour {
         cardsInHand = 0;
         deckPosition = GameObject.Find("Deck Spot").transform.position;
         Debug.Log(deckPosition);
-        deckOffset = new Vector3(deckPosition.x - 1.0f, deckPosition.y - 1.0f, 4.0f);
+        deckOffset = new Vector3(deckPosition.x - 1.0f, deckPosition.y - 1.0f, -4.0f);
         timeSkip = 0.0f;
         movingCard = false;
     }
@@ -46,8 +46,11 @@ public class CardStack : MonoBehaviour {
         {
             timeSkip += Time.deltaTime;
             deckCards[cardsOnDeck - 1].transform.position = Vector3.MoveTowards(deckCards[cardsOnDeck - 1].transform.position, handCards.transform.GetChild(cardsInHand).position, 15.0f * Time.deltaTime);
+            
             if (deckCards[cardsOnDeck - 1].transform.position == handCards.transform.GetChild(cardsInHand).position)
             {
+                deckCards[cardsOnDeck - 1].transform.position.Set(deckCards[cardsOnDeck - 1].transform.position.x, deckCards[cardsOnDeck - 1].transform.position.y, deckCards[cardsOnDeck - 1].transform.position.z - 2);
+                deckCards[cardsOnDeck - 1].transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
                 cardsInHand += 1;
                 cardsOnDeck -= 1;
                 movingCard = false;
@@ -58,7 +61,7 @@ public class CardStack : MonoBehaviour {
 
     void GenerateCard()
     {
-        deckCards.Add(Instantiate(card, deckOffset, Quaternion.identity));
+        deckCards.Add(Instantiate(card, deckOffset, Quaternion.Euler(0.0f, 180.0f, 0.0f)));
         movingCard = true;
     }
 

@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Card
+  - PlayingCard
+  - HoldingCard
+  - DiscardSpot
   layers:
   - Default
   - TransparentFX

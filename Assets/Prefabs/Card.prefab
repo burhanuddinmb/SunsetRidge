@@ -35,9 +35,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4337929278253080}
+  - component: {fileID: 61021724485170784}
   m_Layer: 0
   m_Name: Card
-  m_TagString: Untagged
+  m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,7 +53,6 @@ GameObject:
   - component: {fileID: 4150190333096128}
   - component: {fileID: 33192740687725768}
   - component: {fileID: 23490007287133014}
-  - component: {fileID: 65790646821754508}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -93,7 +93,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1639851605337664}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.3157635, y: -1.769731, z: -0.01}
+  m_LocalPosition: {x: -4.6164026, y: -2.5715046, z: 0.9706322}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4150190333096128}
@@ -143,18 +143,31 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1995062877947402}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65790646821754508
-BoxCollider:
+--- !u!61 &61021724485170784
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1995062877947402}
+  m_GameObject: {fileID: 1639851605337664}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2, y: 3}
+  m_EdgeRadius: 0
 --- !u!212 &212800137378624204
 SpriteRenderer:
   m_ObjectHideFlags: 1
