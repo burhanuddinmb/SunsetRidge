@@ -48,6 +48,20 @@ public class SelectCards : MonoBehaviour {
                 if (hit.collider.tag == "Card")
                 {
                     selectedCard = hit.collider.gameObject;
+                    GameObject deck = GameObject.Find("Deck Spot");
+                    if (selectedCard.transform.parent == deck)
+                    {
+                        for (int i = 0; i < deck.transform.childCount; i++)
+                        {
+                            if (deck.transform.GetChild(i).childCount == 0)
+                            {
+                                selectedArea = deck.transform.GetChild(i).gameObject;
+                                selectedCard.transform.parent = deck.transform.GetChild(i);
+                                selectedCard.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                                cardMoving = true;
+                            }
+                        }
+                    }
                     Debug.Log("Selected");
                 }
                 //Card positions
