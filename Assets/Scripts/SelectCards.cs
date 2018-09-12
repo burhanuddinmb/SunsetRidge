@@ -8,13 +8,14 @@ public class SelectCards : MonoBehaviour {
     GameObject selectedArea;
     bool cardMoving;
     bool destroyCardInEnd;
-    
+    bool cardNeedsToFlip;
 
     // Use this for initialization
     void Start () {
         selectedCard = null;
         cardMoving = false;
         destroyCardInEnd = false;
+        cardNeedsToFlip = false;
     }
 	
 	// Update is called once per frame
@@ -25,6 +26,11 @@ public class SelectCards : MonoBehaviour {
             selectedCard.transform.position = Vector3.MoveTowards(selectedCard.transform.position, selectedArea.transform.position, 15.0f * Time.deltaTime);
             if (selectedCard.transform.position == selectedArea.transform.position)
             {
+                if (cardNeedsToFlip)
+                {
+                    cardNeedsToFlip = false;
+                    selectedCard.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                }
                 selectedCard.transform.position.Set(selectedCard.transform.position.x, selectedCard.transform.position.y, selectedCard.transform.position.z - 111111.0f);
                 if (destroyCardInEnd)
                 {
@@ -44,34 +50,29 @@ public class SelectCards : MonoBehaviour {
 
             if (hit.collider != null)
             {
+                selectedCard = hit.collider.gameObject;
                 //Cards to displace
                 if (hit.collider.tag == "Card")
                 {
-                    selectedCard = hit.collider.gameObject;
                     GameObject deck = GameObject.Find("Deck Spot");
-                    if (selectedCard.transform.parent == deck)
+                    GameObject holdingCards = GameObject.Find("Holding Cards");
+                    if (selectedCard.transform.parent.gameObject == deck)
                     {
-                        for (int i = 0; i < deck.transform.childCount; i++)
+                        for (int i = 0; i < holdingCards.transform.childCount; i++)
                         {
-                            if (deck.transform.GetChild(i).childCount == 0)
+                            if (holdingCards.transform.GetChild(i).childCount == 0)
                             {
-                                selectedArea = deck.transform.GetChild(i).gameObject;
-                                selectedCard.transform.parent = deck.transform.GetChild(i);
-                                selectedCard.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                                selectedArea = holdingCards.transform.GetChild(i).gameObject;
+                                selectedCard.transform.parent = holdingCards.transform.GetChild(i);
                                 cardMoving = true;
+                                cardNeedsToFlip = true;
+                                break;
                             }
                         }
                     }
                     Debug.Log("Selected");
                 }
                 //Card positions
-                else if(hit.collider.tag == "HoldingCard")
-                {
-                    selectedArea = hit.collider.gameObject;
-                    selectedCard.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
-                    selectedCard.transform.parent = selectedArea.transform;
-                    cardMoving = true;
-                }
                 else if (hit.collider.tag == "PlayingCard")
                 {
                     if (selectedCard != null)
